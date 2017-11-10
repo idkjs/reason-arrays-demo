@@ -37,22 +37,16 @@ let make = (_) => {
   render: (_self) =>
     <View>
       <Hello message="Hello from home component" />
+      /* <Greeting name="Tony" /> */
       <FetchEpisodes>
         (
           (response) => {
-            Js.log(response);
-            /* let episodeItems =
-               Array.of_list(
-                 List.map(
-                   (response) =>
-                     <Episode
-                       key=response##data##allEpisodes##id
-                       episode=response##data##allEpisodes##episode
-                     />,
-                 )
-               ); */
-            <div> <h1> (ReasonReact.stringToElement("Episodes!")) </h1> </div>
-            /* (ReasonReact.arrayToElement(episodeItems)) */
+            let episodeItems =
+              response##data##allEpisodes
+              |> Array.map((episode) => <Episode key=episode##id episode=episode##title />);
+            <div> <h1> (ReasonReact.stringToElement("Episodes!")) </h1> </div>(
+              ReasonReact.arrayToElement(episodeItems)
+            )
           }
         )
       </FetchEpisodes>
